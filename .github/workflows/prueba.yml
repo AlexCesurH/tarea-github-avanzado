@@ -1,0 +1,18 @@
+name: Prueba de Runner y Tokens
+
+on:
+  push:
+
+jobs:
+  comparar-tokens:
+    runs-on: self-hosted
+    steps:
+      - name: Comparar DEV_TOKEN con LOCAL_DEV_TOKEN
+        run: |
+          if ("${{ secrets.DEV_TOKEN }}" -eq "$env:LOCAL_DEV_TOKEN") {
+            Write-Host "LOS TOKENS COINCIDEN CORRECTAMENTE"
+            exit 0
+          } else {
+            Write-Host "ERROR: LOS TOKENS NO COINCIDEN"
+            exit 1
+          }
