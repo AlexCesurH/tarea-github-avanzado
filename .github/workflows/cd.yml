@@ -7,11 +7,17 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   update-readme:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Incrementar versión en README
         run: |
           FECHA=$(date +'%Y-%m-%d %H:%M:%S')
